@@ -12,29 +12,23 @@ int main(){
 
   int file = open(filename, O_RDONLY);
   char firstfile[100];
-  read(file,firstfile,100);
-  printf("%d Bytes currently \n", file);
+  int bytes = read(file,firstfile,100);
+  printf("%d Bytes currently \n", bytes);
   printf("%s\n",firstfile);
   close(file);
 
   file = open(filename, O_RDWR);
-  char * writein = "Why do these words rhyme poorly";
-  int written = write(file,writein,31);
-  printf("%d Bytes Written in\n",written);
+  char * to_write = "Demon does rhyme with lemon";
+  int writebytes = write(file,to_write,strlen(to_write));
+  printf("%d Bytes were written in\n",writebytes);
+  printf("%s\n",to_write);
   close(file);
 
-  file = open(filename, O_RDONLY);
-  char infile[31];
-  read(file,infile,31);
-  printf("%s\n",infile);
+  file = open(filename,O_WRONLY);
+  char * reset = "Does demon rhyme with lemon";
+  write(file,reset,strlen(reset));
   close(file);
-
-/*
-  file = open(filename, O_WRONLY);
-  char * reset = "lemon";
-  int rewrite = write(file,reset,strlen(reset));
-  close(file);
-*/
 
   return 0;
+
 }
